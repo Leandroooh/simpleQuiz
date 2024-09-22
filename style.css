@@ -23,7 +23,7 @@
 }
 
 .container {
-    width: 100%;
+    width: 100dvw;
     height: 100dvh;
 
     align-items: center;
@@ -117,6 +117,54 @@ ul li {
 }
 
 li:hover {
+    scale: 1.2;
+}
+
+dialog {
+    /* position: absolute; */
+
+    width: 520px;
+    height: 320px;
+
+    gap: 33px;
+    padding: 33px;
+
+    flex-direction: column;
+
+    margin: 0 auto;
+    color: var(--primary-light-color);
+    background: var(--dark-color);
+}
+
+dialog::backdrop {
+    background: rgb(#FFF, #FFF, #FFF / .1);
+}
+
+#dialog-title h1 {
+    text-align: center;
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+#dialog-description p {
+    text-align: center;
+}
+
+#dialog-button {
+    width: 30%;
+    height: 42px;
+
+    margin: 0 auto;
+    background: transparent;
+    
+    color: var(--primary-light-color);
+    border: 1px solid var(--primary-color);
+
+    transition: all ease-in .5s;
+}
+
+#dialog-button:hover {
     scale: 1.2;
 }
 

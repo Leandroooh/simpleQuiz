@@ -37,6 +37,13 @@ const nextButton = document.getElementById("next-button");
 const pointsScreen = document.getElementById("points-area");
 const answerList = Array.from(document.getElementsByTagName("li"));
 
+// Elementos do Modal
+
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("dialog-h1");
+const modalDesc = document.getElementById("dialog-p");
+const resetButton = document.getElementById("dialog-button");
+
 // Pontos Adquiridos
 let points = 0;
 
@@ -71,11 +78,8 @@ const updateQuestion = () => {
 const nextQuestion = () => {
 
     // Tamanho do Quiz é menor ou igual a pergunta atual?
-    if (quiz.length <= currentId) {
-
-        alert("Você está no final!");
-        return; // Para o código
-
+    if (quiz.length <= currentId + 1) {
+        resetQuiz();
     } else {
 
         // Aumenta +1 na pergunta atual
@@ -93,6 +97,7 @@ const nextQuestion = () => {
     answerList.forEach(answer => answer.classList.remove('respondida'));
 };
 
+// Questão Correta
 const correctAnswer = () => {
     answerList.forEach((item, i) => {
         item.addEventListener('click', () => {
@@ -135,6 +140,7 @@ const correctAnswer = () => {
     });
 }
 
+// Atualização dos Pontos
 const updatePoints = (values) => {
 
     // Soma os pontos com o values fornecido
@@ -145,6 +151,36 @@ const updatePoints = (values) => {
 
 }
 
+// Reiniciando o Quiz
+const resetQuiz = () => {
+
+    // Reiniciando Pontuação e a Pergunta
+    points = 0;
+    currentId = 0;
+
+    // Verificando se o modal NÃO está aberto
+    if (!modal.open) {
+        // Abrindo Modal
+        modal.showModal();
+        modal.open = true;
+
+        // Definindo o Flex para estilização
+        modal.style.display = 'flex'
+    } else {
+        // Atualizando questões
+        updateQuestion();
+
+        // Removendo display flex para o modal sumir
+        modal.style.display = 'none'
+
+        // Definindo a pontuação para 0
+        pointsScreen.textContent = `Pontuação: ${points}`
+
+        // Fechando o modal
+        modal.close()
+    }
+}
+
 // Chamando o evento para o Quiz iniciar quando a página for carregada
 updateQuestion();
 
@@ -152,3 +188,4 @@ updateQuestion();
 correctAnswer();
 
 nextButton.addEventListener("click", nextQuestion);
+resetButton.addEventListener("click", resetQuiz);
