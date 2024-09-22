@@ -50,7 +50,6 @@ let points = 0;
 // Pergunta atual
 let currentId = 0;
 
-
 // atualização as Perguntas
 const updateQuestion = () => {
 
@@ -154,6 +153,10 @@ const updatePoints = (values) => {
 // Reiniciando o Quiz
 const resetQuiz = () => {
 
+    modalTitle.textContent = `PARABÉNS!`
+    modalDesc.textContent = `Você finalizou o Quiz! 
+                            Sua pontuação total foi de ${points}`
+    
     // Reiniciando Pontuação e a Pergunta
     points = 0;
     currentId = 0;
